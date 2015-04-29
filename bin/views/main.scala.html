@@ -1,0 +1,46 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/api.js")" type="text/javascript"></script>
+        <script type="text/javascript">
+   			soundcloud.addEventListener('onPlayerReady', function(player, data) {
+     		player.api_play();
+   			});
+		</script>
+    </head>
+    <body>
+        @content
+        <div id="widget-container">
+		<object height="81" width="500" id="myPlayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+		  <param name="movie" value="https://soundcloud.com/constellation-records/colin-stetson-and-sarah-neufeld-the-sun-roars-into-view"></param>
+		  <param name="allowscriptaccess" value="always"></param>
+		  <embed allowscriptaccess="always" width="600" height="81" src="http://player.soundcloud.com/player.swf?url=https://soundcloud.com/constellation-records/colin-stetson-and-sarah-neufeld-the-sun-roars-into-view&enable_api=true&object_id=myPlayer" type="application/x-shockwave-flash" name="myPlayer"></embed>
+		</object>
+		</div>
+
+		<div class="inputContainer">
+		    <input class="urlInput" placeholder="Enter SoundCloud URL of the track/set/user" type="text">
+		    <button class="reload">Reload widget</button>
+      	</div>
+		<div class="right">
+      		<dl class="actionButtons">
+	        <dd><button class="seekTo">Seek <input type="text" value="30000" size="10" maxlength="10" /></button></dd>
+      		</dl>
+   		</div>
+       
+      <!--
+        <object height="81" width="100%" id="yourPlayerId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+  		<param name="movie" value="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=yourPlayerId"></param>
+  		<param name="allowscriptaccess" value="always"></param>
+  		<embed allowscriptaccess="always" height="81" src="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=yourPlayerId" type="application/x-shockwave-flash" width="100%" name="yourPlayerId"></embed>
+		</object>
+	 -->
+    </body>
+</html>
