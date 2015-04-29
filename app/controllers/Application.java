@@ -8,7 +8,7 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render("LUL","Welcome to the Soundcloud Discovery Page!"));
+        return ok(index.render("Discovery","Welcome to the Soundcloud Discovery Page!"));
     }
 
 }
