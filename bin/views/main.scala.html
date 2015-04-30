@@ -15,24 +15,42 @@
   (function(){
     var widgetIframe 	= document.getElementById('sc-widget');
     var widget      	= SC.Widget(widgetIframe);
+	var songStart		= 12000;
+	var songEnd			= 15000;
 	var url1 			= "";
 	var url2 			= 'http://api.soundcloud.com/users/1539950/favorites';
 
-
-     widget.bind(SC.Widget.Events.READY, function() {
-      // load new widget
-      widget.play();
+	/*
+    widget.bind(SC.Widget.Events.READY, function() {
+		widget.play();
+		widget.bind(SC.Widget.Events.PLAY,function(){
+			widget.seekTo(songStart);
+		});
     });
+    */
 	
-	widget.bind(SC.Widget.Events.PLAY,function(){
-		widget.seekTo(31000);
-	});
-	
+	/*
 	 widget.bind(SC.Widget.Events.PLAY_PROGRESS, function() {
-		if( widget.getPosition() > 35000) {	
-			widget.pause();
-		}
+		widget.getPosition(
+			function(position) {
+				if( position > songEnd) {
+					//window.alert('current volume value is ' + position);				
+					widget.pause();
+				}
+			}
+		);
 	  });
+	  */
+	/*
+	widget.bind(SC.Widget.Events.PAUSE, function() {
+		widget.getPosition(
+			function(position) {
+					window.alert('current position value is ' + position);
+			}
+		);
+	  });
+	  */
+	
 	
 	  widget.bind(SC.Widget.Events.FINISH, function() {
 		widget.load(url2, {
@@ -61,6 +79,8 @@
 	(function(){
 		var widgetIframe 	= document.getElementById('sc-widget');
 		var widget      	= SC.Widget(widgetIframe);
+		var songStart	= 12000;
+		var songEnd		= 15000;
 		var url2 			= 'http://api.soundcloud.com/users/1539950/favorites';
 		
 		
@@ -94,7 +114,31 @@
 			widget.seekTo(seekInput.value)
 		});
 		
-		
+		var previewButton = document.querySelector('.preview');
+		addEvent(previewButton, 'click', function(e) {
+			//'if' prevents the function to trigger when the input field is pressed.
+			if (e.target !== this) {
+				e.stopPropagation();
+				return false;
+			}
+			
+			widget.bind(SC.Widget.Events.READY, function() {
+				widget.play();
+	  			widget.bind(SC.Widget.Events.PLAY,function(){
+					widget.seekTo(songStart);
+				});
+			});
+					
+			widget.bind(SC.Widget.Events.PLAY_PROGRESS, function() {
+				widget.getPosition(
+					function(position) {
+						if( position > songEnd) {			
+							widget.pause();
+						}
+					}
+				);
+			  });
+		});
 	}());
   </script>
 </body>
