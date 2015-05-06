@@ -2,13 +2,13 @@ package controllers;
 
 import play.*;
 import play.mvc.*;
-
+import snippet.RandomSnippet;
 import views.html.*;
 
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render("Discovery","Welcome to the Soundcloud Discovery Page!"));
+    	RandomSnippet snpt = new RandomSnippet();
+        return ok(index.render(snpt.getStart()));
     }
-
 }

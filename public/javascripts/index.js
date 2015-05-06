@@ -2,8 +2,8 @@
 	(function(){
 		var widgetIframe 	= document.getElementById('sc-widget');
 		var widget      	= SC.Widget(widgetIframe);
-		var songStart	= 55000;
-		var songEnd		= 65000;
+		var songStart		= 55000;
+		var songEnd			= 65000;
 		var url2 			= 'http://api.soundcloud.com/users/1539950/favorites';
 		
 		
@@ -16,7 +16,7 @@
         }
       }
 		
-		//Adding the functionality of reloading the wiidget with a given url.
+		//Adding the functionality of reloading the widget with a given url.
 		var reloadButton = document.querySelector('.reload');
 		var widgetUrlInput = document.querySelector('.urlInput');
 		addEvent(reloadButton, 'click', function() {
@@ -54,7 +54,11 @@
 		var previewButton = document.querySelector('.preview');
 		addEvent(previewButton, 'click', function(e) {			
 			widget.bind(SC.Widget.Events.READY, function() {
-				widget.play();
+				if(widget.isPaused(  function(paused) {
+						if( paused) {			
+							widget.play();
+						}
+					} ))
 	  			widget.bind(SC.Widget.Events.PLAY,function(){
 					widget.seekTo(songStart);
 					widget.unbind(SC.Widget.Events.PLAY)
@@ -66,6 +70,34 @@
 				widget.getPosition(
 					function(position) {
 						if( position > songEnd) {			
+							widget.pause();
+							widget.unbind(SC.Widget.Events.PLAY_PROGRESS)
+						}
+					}
+				);
+			  });
+		});
+		
+		var randomSnippet = document.querySelector('.randSnip');
+		var randStart = randomSnippet.querySelector('value');
+		addEvent(randomSnippet, 'click', function(e) {			
+			widget.bind(SC.Widget.Events.READY, function() {
+				if(widget.isPaused(  function(paused) {
+						if( paused) {			
+							widget.play();
+						}
+					} ))
+	  			widget.bind(SC.Widget.Events.PLAY,function(){
+					widget.seekTo(randStart);
+					widget.unbind(SC.Widget.Events.PLAY)
+					widget.unbind(SC.Widget.Events.READY)
+				});
+			});
+					
+			widget.bind(SC.Widget.Events.PLAY_PROGRESS, function() {
+				widget.getPosition(
+					function(position) {
+						if( position > ( randStart + 3000 ) ) {			
 							widget.pause();
 							widget.unbind(SC.Widget.Events.PLAY_PROGRESS)
 						}
