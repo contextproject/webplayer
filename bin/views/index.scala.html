@@ -23,7 +23,7 @@
 </div>	
 	<script type="text/javascript" src="@routes.Assets.at("javascripts/index.js")"></script>
 	<script> 
-	
+
 	var widgetIframe = document.getElementById('sc-widget');
 	var widget = SC.Widget(widgetIframe);
 	
@@ -40,7 +40,8 @@
 	var getButton = document.querySelector('.getTrack');
 	var idInput = document.querySelector('.idInput');
 	addEvent(getButton, 'click', function() {
-		window.location.href += idInput.value;
+		window.location.href = window.location.protocol + idInput.value;
 	});
+
 	</script>
 }

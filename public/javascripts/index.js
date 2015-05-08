@@ -25,14 +25,15 @@
 			auto_play : true
 		});
 	});
-
+	
+	/*
 	//Adding the functionality of getTrack button with an id.
 	var getButton = document.querySelector('.getTrack');
 	var idInput = document.querySelector('.idInput');
 	addEvent(getButton, 'click', function() {
 		window.location.origin + idInput.value;
 	});
-	
+	*/
 	// Adding functionality to the seek button with the given input.
 	var seekToButton = document.querySelector('.seekTo');
 	var seekInput = seekToButton.querySelector('input');
